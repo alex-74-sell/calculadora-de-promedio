@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Calificaciones</title>
+    <script>
+        function calcular() {
+            // Obtener los valores de los inputs
+            var parcial = parseFloat(document.getElementById("parcial").value);
+            var segundo_parcial = parseFloat(document.getElementById("segundo_parcial").value);
+            var tercer_parcial = parseFloat(document.getElementById("tercer_parcial").value);
+
+            // Calcular los valores parciales
+            var parcial_final = (parcial + segundo_parcial) / 2;
+            var primera_parte = (parcial_final * 60) / 100;
+            var segunda_parte = (tercer_parcial * 40) / 100;
+            var ultima_parte = primera_parte + segunda_parte;
+
+            // Mostrar el resultado final
+            document.getElementById("resultado").innerText = "Calificación final: " + ultima_parte.toFixed(2);
+
+            // Determinar si aprobó o reprobó
+            if (ultima_parte >= 70) {
+                document.getElementById("estado").innerText = "¡Aprobaste!";
+            } else {
+                document.getElementById("estado").innerText = "Reprobaste";
+            }
+
+            // Redondear la calificación
+            var redondea = Math.round(ultima_parte);
+            document.getElementById("redondeo").innerText = "Calificación redondeada: " + redondea;
+        }
+    </script>
+</head>
+<body>
+    <h1>Cálculo de Calificaciones</h1>
+    <form onsubmit="event.preventDefault(); calcular();">
+        <label for="parcial">Primer Parcial:</label>
+        <input type="number" id="parcial" required><br>
+
+        <label for="segundo_parcial">Segundo Parcial:</label>
+        <input type="number" id="segundo_parcial" required><br>
+
+        <label for="tercer_parcial">Tercer Parcial:</label>
+        <input type="number" id="tercer_parcial" required><br>
+
+        <button type="submit">Calcular</button>
+    </form>
+
+    <p id="resultado"></p>
+    <p id="estado"></p>
+    <p id="redondeo"></p>
+</body>
+</html>
